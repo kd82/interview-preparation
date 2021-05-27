@@ -16,3 +16,8 @@ class Solution:
                 else:
                     stack.append(int(float(r)/l))
         return sum(stack)
+"""
+Take aways:
+Python treats integer division differently 
+We can use String comparison to make the code cleaner
+"""
