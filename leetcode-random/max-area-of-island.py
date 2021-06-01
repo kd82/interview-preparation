@@ -31,3 +31,29 @@ def maxAreaOfIsland(grid: List[List[int]]) -> int:
                 if grid[i][j] == 1:
                     count = max(bfs(grid, i, j), count, 1)
         return count
+def maxAreaOfIsland2(self, grid: List[List[int]]) -> int:
+        def findArea(grid, i, j):
+            grid[i][j] = 2
+            area = 1
+            if i + 1 < self.m and grid[i + 1][j] == 1:
+                area += findArea(grid, i + 1, j)
+            if j + 1 < self.n and grid[i][j + 1] == 1:
+                area += findArea(grid, i, j + 1)
+            if i - 1 >= 0 and grid[i - 1][j] == 1:
+                area += findArea(grid, i - 1, j)
+            if j - 1 >= 0 and grid[i][j - 1] == 1:
+                area += findArea(grid, i, j - 1)
+            return area
+        maxArea = 0
+        self.m, self.n = len(grid), len(grid[0])
+        for i in range(self.m):
+            for j in range(self.n):
+                    if grid[i][j] == 1:
+                        area = findArea(grid, i, j)
+                        maxArea = max(area, maxArea)
+        return maxArea
+"""
+1. Think recursively and make sure you follow only the viable path 
+avoid keeping them in memory and only keep the valid ones
+2. Very fast solutions are sometimes dfs when you wanna know max depth
+"""
