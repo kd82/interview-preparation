@@ -7,13 +7,13 @@ class TreeNode:
         self.val = 0
 
 def longestConsecutive1(root: TreeNode) -> int: # 
-        max_len = 0
         def dfs(root, parent, length):
             if not root: return
             length = length + 1 if parent and root.val == parent.val + 1 else 1
-            max_len = max(max_len, length)
+            #max_len = max(max_len, length)
             dfs(root.left, root, length)
             dfs(root.right, root, length)
+        max_len = 0
         dfs(root, None, 0)
         return max_len
 def longestConsecutive2(root: TreeNode) -> int: # 
