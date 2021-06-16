@@ -25,6 +25,30 @@ class Solution:
                             
             depth += 1
         return -1
+    def openLock(self, deadends: List[str], target: str) -> int:
+        if "0000" in deadends:
+            return -1
+        begin = set(["0000"])
+        end = set([target])
+        deadends = set(deadends)
+        depth = 0
+        while begin and end:
+            temp = []
+            for s in begin:
+                if s in end:
+                    return depth
+                if s in deadends:
+                    continue
+                for i in range(4):
+                    x = int(s[i])
+                    for d in (-1, 1):
+                        y = (x + d) % 10
+                        next = s[:i] + str(y) + s[i + 1:]
+                        if next not in deadends:
+                            temp.append(next)
+            begin = temp
+            depth += 1
+        return -1
 """
 1. Use the template when using bfs 
 2. Learned a new way to go back and front when using the numbers 
